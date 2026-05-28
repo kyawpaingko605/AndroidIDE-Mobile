@@ -65,12 +65,10 @@ dependencyResolutionManagement {
     }
   }
 
-  // ဒီနေရာမှာ FAIL_ON_PROJECT_REPOS လို့ ပြန်ပြောင်းပြီး ပိတ်လိုက်ပါတယ်
-  repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+  // အငြင်းပွားဖွယ်ဖြစ်စေသော စည်းကမ်းချက် Mode လိုင်းကို လုံးဝဖြုတ်ပစ်ပြီး repositories သက်သက်ပဲ ထားရှိပါတော့တယ်
   repositories {
     google()
     mavenCentral()
-    // ဖြည့်ထားတဲ့ Snapshot repository တွေကိုတော့ ဒီအတိုင်း ဆက်ထားပါတယ်
     maven { url = uri("https://oss.sonatype.org/content/repositories/snapshots/") }
     maven { url = uri("https://s01.oss.sonatype.org/content/repositories/snapshots/") }
     maven { url = uri("https://s01.oss.sonatype.org/content/groups/public/") }
