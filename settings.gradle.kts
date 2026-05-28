@@ -65,12 +65,12 @@ dependencyResolutionManagement {
     }
   }
 
-  // အမှားမတက်အောင် ဒီနေရာမှာ PREFER_SETTINGS လို့ ပြောင်းလဲသတ်မှတ်လိုက်ပါတယ်
-  repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS)
+  // ဒီနေရာမှာ FAIL_ON_PROJECT_REPOS လို့ ပြန်ပြောင်းပြီး ပိတ်လိုက်ပါတယ်
+  repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
   repositories {
     google()
     mavenCentral()
-    // ပျောက်နေတဲ့ sora-editor snapshot တွေ ရှာတွေ့အောင် ဒီအောက်က ၃ ကြောင်းကို ဖြည့်ထားပါတယ်
+    // ဖြည့်ထားတဲ့ Snapshot repository တွေကိုတော့ ဒီအတိုင်း ဆက်ထားပါတယ်
     maven { url = uri("https://oss.sonatype.org/content/repositories/snapshots/") }
     maven { url = uri("https://s01.oss.sonatype.org/content/repositories/snapshots/") }
     maven { url = uri("https://s01.oss.sonatype.org/content/groups/public/") }
@@ -106,7 +106,7 @@ FDroidConfig.load(rootDir)
 
 if (FDroidConfig.hasRead && FDroidConfig.isFDroidBuild) {
   gradle.rootProject {
-    val regex = Regex("^v\\d+\\.?\\d+\\.?\\d+-%w+")
+    val regex = Regex("^v\\d+\\.?\\d+\\.?\\d+-\\w+")
 
     val simpleVersion = regex.find(FDroidConfig.fDroidVersionName!!)?.value
       ?: throw IllegalArgumentException("Invalid version '${FDroidConfig.fDroidVersionName}. Version name must have semantic version format.'")
