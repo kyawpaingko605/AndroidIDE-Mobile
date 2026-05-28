@@ -45,7 +45,8 @@ jobs:
   build_apk:
     strategy:
       matrix:
-        build_type: ['debug', 'release']
+        # သော့ချက် (Key) မရှိလို့ အမှားတက်နေတဲ့ release ကို ပိတ်ပြီး debug တစ်ခုတည်းကိုပဲ Build ခိုင်းလိုက်ပါတယ်
+        build_type: ['debug']
     name: Build APK
     runs-on: ubuntu-latest
     steps:
