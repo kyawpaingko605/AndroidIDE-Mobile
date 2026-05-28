@@ -1,18 +1,18 @@
 /*
- *  This file is part of AndroidIDE.
+ * This file is part of AndroidIDE.
  *
- *  AndroidIDE is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
+ * AndroidIDE is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- *  AndroidIDE is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
+ * AndroidIDE is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
  *
- *  You should have received a copy of the GNU General Public License
- *   along with AndroidIDE.  If not, see <https://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU General Public License
+ * along with AndroidIDE.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 @file:Suppress("UnstableApiUsage")
@@ -65,10 +65,13 @@ dependencyResolutionManagement {
     }
   }
 
-  repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+  // အမှားမတက်အောင် ဒီနေရာမှာ PREFER_SETTINGS လို့ ပြောင်းလဲသတ်မှတ်လိုက်ပါတယ်
+  repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS)
   repositories {
     google()
     mavenCentral()
+    // ပျောက်နေတဲ့ sora-editor snapshot တွေ ရှာတွေ့အောင် ဒီအောက်က ၃ ကြောင်းကို ဖြည့်ထားပါတယ်
+    maven { url = uri("https://oss.sonatype.org/content/repositories/snapshots/") }
     maven { url = uri("https://s01.oss.sonatype.org/content/repositories/snapshots/") }
     maven { url = uri("https://s01.oss.sonatype.org/content/groups/public/") }
     maven { url = uri("https://jitpack.io") }
@@ -103,7 +106,7 @@ FDroidConfig.load(rootDir)
 
 if (FDroidConfig.hasRead && FDroidConfig.isFDroidBuild) {
   gradle.rootProject {
-    val regex = Regex("^v\\d+\\.?\\d+\\.?\\d+-\\w+")
+    val regex = Regex("^v\\d+\\.?\\d+\\.?\\d+-%w+")
 
     val simpleVersion = regex.find(FDroidConfig.fDroidVersionName!!)?.value
       ?: throw IllegalArgumentException("Invalid version '${FDroidConfig.fDroidVersionName}. Version name must have semantic version format.'")
