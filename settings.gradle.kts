@@ -65,7 +65,9 @@ dependencyResolutionManagement {
     }
   }
 
-  // အငြင်းပွားဖွယ်ဖြစ်စေသော စည်းကမ်းချက် Mode လိုင်းကို လုံးဝဖြုတ်ပစ်ပြီး repositories သက်သက်ပဲ ထားရှိပါတော့တယ်
+  // ဗဟိုကနေ ပိတ်မထားဘဲ ပရောဂျက်ထဲက သတ်မှတ်ချက်အတိုင်း ခွင့်ပြုရန် အတင်းသတ်မှတ်လိုက်ပါတယ်
+  repositoriesMode.set(RepositoriesMode.PREFER_PROJECT)
+
   repositories {
     google()
     mavenCentral()
