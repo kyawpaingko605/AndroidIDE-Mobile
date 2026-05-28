@@ -1,29 +1,29 @@
 /*
- *  This file is part of AndroidIDE.
+ * This file is part of AndroidIDE.
  *
- *  AndroidIDE is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
+ * AndroidIDE is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- *  AndroidIDE is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
+ * AndroidIDE is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
  *
- *  You should have received a copy of the GNU General Public License
- *   along with AndroidIDE.  If not, see <https://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU General Public License
+ * along with AndroidIDE.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 package com.itsaky.androidide.testing.android.rules
 
 import com.itsaky.androidide.db.IRealmProvider
 import com.itsaky.androidide.testing.android.util.NoOpStatement
-import io.realm.Realm
-import io.realm.log.LogLevel
-import io.realm.log.RealmLog
+import io.realm.kotlin.Realm
+import io.realm.kotlin.log.LogLevel
 import org.junit.runner.Description
 import org.junit.runners.model.Statement
+import java.io.File
 
 /**
  * Rule for Realm DB tests.
@@ -47,14 +47,13 @@ class RealmDBTestRule(
       realm.action()
     } finally {
       if (deleteDbAfterTest) {
-        realm.configuration.realmDirectory.deleteRecursively()
+        val path = realm.configuration.path
+        File(path).parentFile?.deleteRecursively()
       }
     }
   }
 
   override fun apply(base: Statement?, description: Description?): Statement {
-    Realm.init(context.applicationContext)
-    RealmLog.setLevel(LogLevel.ALL)
     base?.evaluate()
     return NoOpStatement()
   }
